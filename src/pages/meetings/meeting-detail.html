@@ -1,0 +1,70 @@
+<ion-header>
+
+  <ion-navbar color="header">
+    <ion-title>Meeting: {{meeting.getPrintDate()}} </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content  ion-content padding>
+  <div  *ngIf='!meeting["_id"]' >
+          <ion-item>
+            <h2>Meeting Date: </h2>
+            <ion-datetime 
+              displayFormat="MMM DDD YYYY" 
+              pickerFormat=" MMM DDD YYYY" 
+              placeholder="Select Meeting Date"
+              [(ngModel)]="meetingDate">
+            </ion-datetime>
+        </ion-item>
+        <button (click)="create()"  ion-button full>Create</button>
+  </div>
+  <div *ngIf='meeting["_id"]' >
+    <ion-card *ngFor="let talk of meeting.talks; let i = index;">
+
+      <ion-item  class="sub-header">
+        <h3>{{meetingTypes[i].name}}</h3>
+         <div item-right align="right">
+            Time: {{printTime(talk.time)}}
+         </div>
+      </ion-item>
+      <div padding item-right align="right">
+          <button (click)="timer(i, 'play')" ion-button icon-only>
+            <ion-icon name="play"></ion-icon>
+          </button>
+          <button (click)="timer(i, 'pause')" ion-button icon-only>
+            <ion-icon name="pause"></ion-icon>
+          </button>
+          <button (click)="timer(i, 'reset')" ion-button icon-only>
+            <ion-icon name="refresh"></ion-icon>
+          </button>
+      </div>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Student</ion-label>
+          <ion-select [(ngModel)]="talk.student" >
+            <ion-option *ngFor='let student of students;' 
+                value="{{student._id}}">{{student.printFullName()}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Lesson</ion-label>
+          <ion-select [(ngModel)]="talk.lesson" >
+            <ion-option *ngFor='let lesson of lessons;' 
+                value="{{lesson.id}}">{{lesson.id}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+        <ion-label floating>Note</ion-label>
+        <ion-textarea 
+              fz-elastic
+              [(ngModel)]="talk.note" 
+              rows="3" 
+              playholder="Enter your notes here" ></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>  

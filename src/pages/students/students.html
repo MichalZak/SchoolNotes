@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="header">
+    <ion-title>Students</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="add()"><ion-icon name="add-circle"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<ion-list>
+  <ion-item-sliding  *ngFor="let item of students; let i = index;"  >
+    <button ion-item (click)="view(item._id)" >      
+      <ion-note>
+        {{item.printFullName()}}  
+      </ion-note>
+    </button> 
+    <ion-item-options>
+      <button ion-button color="danger" (click)="remove(item)">
+        Remove
+      </button>
+     </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar  color="header">
+    <ion-title  color="light" >Meetings</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="add()"><ion-icon name="add-circle"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<ion-list>
+  <ion-item-sliding  *ngFor="let m of meetings; let i = index;"  >
+    <button ion-item (click)="view(m._id)" >   
+      <h2 color="primary" >{{m.getPrintDate()}}</h2>  
+      <ion-note color="secondary"  item-right align="right">
+        {{printMeetingSummary(m)}}
+      </ion-note>
+    </button> 
+    <ion-item-options>
+      <button ion-button color="danger" (click)="remove(m)">
+        Remove
+      </button>
+     </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+
+</ion-content>

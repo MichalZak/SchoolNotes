@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar color="header">
+    <ion-title>Student: {{student.printFullName()}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<!-- show this when workig with existing record -->
+<ion-content *ngIf='student["_id"]' ion-content  padding>
+  <ion-list>
+      <ion-item></ion-item>
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="student.name"></ion-input>
+      </ion-item>
+  </ion-list>
+</ion-content>  
+
+
+<!-- Only show this when creating new record -->
+<ion-content *ngIf='!student["_id"]' ion-content padding>
+  
+  
+  <ion-item>
+    <ion-label floating>Short Name</ion-label>
+    <ion-input type="text" [(ngModel)]="shortName"></ion-input>
+  </ion-item>
+
+  <ion-label>This name will be used as an identifier, must be unique.</ion-label>
+  <button (click)="create()" [disabled]='createButtonDisabled()'  ion-button full>Create</button>
+
+  
+
+  
+  
+</ion-content>
+
